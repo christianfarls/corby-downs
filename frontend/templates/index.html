@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Horse Race</title>
+  </head>
+  <body>
+    <h1>Horse Race</h1>
+
+    <p>Cards left in deck: {{ deck_size }}</p>
+    <p><a href="{{ url_for('flip_card') }}">Flip Next Card</a></p>
+
+    {% if last_card is not none %}
+      <p>Last card flipped: {{ suits_data[last_card][1] }}</p>
+      <!-- suits_data[last_card][1] = the name, e.g., "Clubs" -->
+    {% else %}
+      <p>No card flipped yet.</p>
+    {% endif %}
+
+    <h2>Horse Positions</h2>
+    <table border="1">
+      <tr>
+        <th>Suit</th>
+        <th>Position</th>
+      </tr>
+      {% for s in suits_data %}
+      <!-- s is a tuple like (0, "Clubs") -->
+      <tr>
+        <td>{{ s[1] }}</td>
+        <td>{{ positions[s[0]] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <h2>Side Cards (Revealed so far)</h2>
+    <ol>
+      {% for r in revealed_data %}
+      <!-- r is a tuple like (0, Suit.CLUBS) or (0, None) -->
+      {% if r[1] is none %}
+        <li>??? (not revealed yet)</li>
+      {% else %}
+        <li>{{ suits_data[r[1]][1] }}</li>
+      {% endif %}
+      {% endfor %}
+    </ol>
+  </body>
+</html>

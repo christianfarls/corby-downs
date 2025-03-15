@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Declare Side Card</title>
+  </head>
+  <body>
+    <h1>Declare Side Card #{{ side_card_index + 1 }}</h1>
+    <p>
+      All horses have reached at least row {{ side_card_index + 1 }}.
+      Please pick which suit this side card actually is:
+    </p>
+
+    <form method="POST">
+      {% for s in suits_data %}
+        <!-- s is (index, name), e.g. (0, "Clubs") -->
+        <div>
+          <input type="radio" id="s{{ s[0] }}" name="suit" value="{{ s[0] }}">
+          <label for="s{{ s[0] }}">{{ s[1] }}</label>
+        </div>
+      {% endfor %}
+      <button type="submit">Confirm</button>
+    </form>
+  </body>
+</html>

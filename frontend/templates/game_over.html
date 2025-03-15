@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Game Over</title>
+  </head>
+  <body>
+    <h1>Game Over</h1>
+    <h2>Final Positions</h2>
+    <table border="1">
+      <tr>
+        <th>Suit</th>
+        <th>Position</th>
+      </tr>
+      {% for s in suits_data %}
+      <!-- s is (index, name) -->
+      <tr>
+        <td>{{ s[1] }}</td>
+        <td>{{ positions[s[0]] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <h2>Revealed Side Cards</h2>
+    <ol>
+      {% for r in revealed_data %}
+      <!-- r is (sideCardIndex, suitOrNone) -->
+      {% if r[1] is none %}
+        <li>Not revealed</li>
+      {% else %}
+        <li>{{ suits_data[r[1]][1] }}</li>
+      {% endif %}
+      {% endfor %}
+    </ol>
+  </body>
+</html>
