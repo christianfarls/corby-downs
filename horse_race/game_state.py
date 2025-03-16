@@ -123,11 +123,18 @@ class GameState:
         self.next_side_card_index += 1
 
     def move_forward(self, suit: Suit):
-        self.horse_positions[suit] += 1
+        if self.horse_positions[suit] < 6:
+            self.horse_positions[suit] += 1
+        self.last_flipped = suit
+        self.deck_suit_counts[suit] -= 1
 
     def move_backward(self, suit: Suit):
-        self.horse_positions[suit] = max(0, self.horse_positions[suit] - 1)
+        if self.horse_positions[suit] < 6:
+            self.horse_positions[suit] = max(0, self.horse_positions[suit] - 1)
+
+        self.deck_suit_counts[suit] -= 1
 
     def is_finished(self) -> bool:
-        """Game ends when all horses are >= 6, but you can customize."""
-        return all(pos >= 6 for pos in self.horse_positions)
+        """Game ends when at least 3 horses have positions >= 6."""
+        finished_count = sum(pos >= 6 for pos in self.horse_positions)
+        return finished_count >= 3

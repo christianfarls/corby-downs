@@ -34,7 +34,6 @@ def simulate_one_future(initial_state: GameState) -> int:
         if state.is_finished():
             break
         state.move_forward(suit)
-        state.deck_suit_counts[suit] -= 1
 
         # Now replicate threshold flips automatically (no user input in simulation)
         # If all horses meet threshold, flip the side card (which is now known in the sim).

@@ -42,6 +42,14 @@ def flip_card():
     game_state.flip_card()
     return redirect(url_for("index"))
 
+@app.route("/move_horse/<int:suit>")
+def move_horse(suit):
+    """ Move horse depending on the suit, recalc probabilities. """
+    game_state.move_forward(Suit(suit))
+    from horse_race.simulate import simulate_many
+    game_state.probabilities = simulate_many(game_state, 3000)
+    return redirect(url_for("index"))
+
 @app.route("/declare_side_card", methods=["GET", "POST"])
 def declare_side_card():
     """
