@@ -22,12 +22,14 @@
       <tr>
         <th>Suit</th>
         <th>Position</th>
+        <th>Probability</th>
       </tr>
       {% for s in suits_data %}
       <!-- s is a tuple like (0, "Clubs") -->
       <tr>
         <td>{{ s[1] }}</td>
         <td>{{ positions[s[0]] }}</td>
+        <td>{{ ((1-probabilities[s[0]])*100)|round(2) }}</td>
       </tr>
       {% endfor %}
     </table>
